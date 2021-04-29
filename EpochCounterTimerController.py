@@ -10,18 +10,18 @@ class EpochCounterTimerController(CounterTimerController):
 
     This example is so basic that it is not even directly described in the
     documentation"""
+
+    def __init__(self, inst, props, *args, **kwargs):
+        """Constructor"""
+        CounterTimerController.__init__(self, inst, props, *args, **kwargs)
+        self.int_time = 0
+        self.start_time = 0
+    
     def AddDevice(self, axis):
         pass
 
     def DeleteDevice(self, axis):
         pass
-
-    def __init__(self, inst, props, *args, **kwargs):
-        """Constructor"""
-        super(epochCounterTimerController,
-              self).__init__(inst, props, *args, **kwargs)
-        self.int_time = 0
-        self.start_time = 0
 
     def ReadOne(self, axis):
         """Get the specified counter value"""
@@ -34,7 +34,7 @@ class EpochCounterTimerController(CounterTimerController):
         else:
             return State.On, "Counter is stopped"
         
-    def StartOne(self, axis, value):
+    def StartOne(self, axis, value=None):
         """acquire the specified counter"""
         self.int_time = value
         self.start_time = time.time()
@@ -42,9 +42,13 @@ class EpochCounterTimerController(CounterTimerController):
     def StartAll(self):
         pass
 
-    def LoadOne(self, axis, value, repetitions):
+    def LoadOne(self, axis, value, repetitions, latency_time):
         pass
 
     def StopOne(self, axis):
+        """Stop the specified counter"""
+        pass
+
+    def AbortOne(self, axis):
         """Stop the specified counter"""
         pass
